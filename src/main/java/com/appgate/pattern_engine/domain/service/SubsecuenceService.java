@@ -19,7 +19,7 @@ public class SubsecuenceService implements SubsequenceServicePort {
   @Override
   public int calculateSubsequences(String sourceText, String targetText) {
     Subsequence subsequence = new Subsequence(sourceText, targetText);
-    return subsequence.calculateCount();
+    return subsequence.calculateNumberSubsequences();
   }
 
 
