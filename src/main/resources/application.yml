@@ -1,0 +1,11 @@
+#  Server configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /pattern-engine/v1
+
+
+# Spring configuration
+spring:
+  application:
+    name: pattern-engine
