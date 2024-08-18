@@ -3,6 +3,9 @@
  */
 package com.appgate.pattern_engine.application.usecase;
 
+import com.appgate.pattern_engine.infrastructure.dto.SubsequenceDto;
+import com.appgate.pattern_engine.infrastructure.exception.PatterEngineException;
+
 /**
  *
  * @author angiekroll@gmail.com - Ángela Carolina Castillo Rodríguez.
@@ -10,6 +13,6 @@ package com.appgate.pattern_engine.application.usecase;
  * @since - 1.0.0
  */
 public interface DistinctSubsequencesUseCasePort {
-  int countDistinctSubsequences(String sourceText, String targetText);
+  SubsequenceDto countDistinctSubsequences(String sourceText, String targetText) throws PatterEngineException;
 
 }

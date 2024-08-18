@@ -14,7 +14,6 @@ public class Subsequence {
 
   private String sourceText;
   private String targetText;
-  private int count = 0;
 
   public Subsequence(String sourceText, String targetText) {
     this.sourceText = sourceText;
@@ -24,33 +23,25 @@ public class Subsequence {
   public Subsequence() {
   }
 
-  public int getCount() {
-    return count;
-  }
-
-  public int calculateCount() {
+  public int calculateNumberSubsequences() {
 
     int sourceLength = sourceText.length();
+    int targetLength = targetText.length();
 
-    this.count = (int) IntStream.rangeClosed(1, sourceLength)
-        .mapToObj(i -> sourceText.substring(0, i))
-        .filter(subsequence -> isSubsequence(subsequence, targetText))
-        .count();
+    int[][] matriz = new int[sourceLength + 1][targetLength + 1];
 
-    return count;
+    IntStream.rangeClosed(0, sourceLength).forEach(i -> matriz[i][0] = 1);
+
+    IntStream.range(1, sourceLength + 1)
+        .forEach(sourceTextIndex -> IntStream.range(1, targetLength + 1)
+            .forEach(targetTextIndex -> matriz[sourceTextIndex][targetTextIndex] =
+                sourceText.charAt(sourceTextIndex - 1) == targetText.charAt(targetTextIndex - 1)
+                    ? matriz[sourceTextIndex - 1][targetTextIndex - 1] + matriz[sourceTextIndex
+                    - 1][targetTextIndex]
+                    : matriz[sourceTextIndex - 1][targetTextIndex]));
+
+    return matriz[sourceLength][targetLength];
+
   }
 
-  private boolean isSubsequence(String subsequence, String targetText) {
-    int subsequenceIndex = 0;
-    int targetTexIndex = 0;
-    while (subsequenceIndex < subsequence.length() && targetTexIndex < targetText.length()) {
-      if (subsequence.charAt(subsequenceIndex) == targetText.charAt(targetTexIndex)) {
-        subsequenceIndex++;
-        targetTexIndex++;
-      } else {
-        targetTexIndex++;
-      }
-    }
-    return subsequenceIndex == subsequence.length();
-  }
 }
