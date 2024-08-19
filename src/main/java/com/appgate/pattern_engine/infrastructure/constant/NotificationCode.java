@@ -3,6 +3,7 @@
  */
 package com.appgate.pattern_engine.infrastructure.constant;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
@@ -16,6 +17,7 @@ public enum NotificationCode {
       HttpStatus.BAD_REQUEST);
 
 
+  @Getter
   private final HttpStatus httpStatus;
   private final String message;
 
@@ -27,10 +29,6 @@ public enum NotificationCode {
 
   public String getDescription() {
     return message;
-  }
-
-  public HttpStatus getHttpStatus() {
-    return httpStatus;
   }
 
 }

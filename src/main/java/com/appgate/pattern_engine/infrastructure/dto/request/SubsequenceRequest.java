@@ -22,16 +22,16 @@ import lombok.Data;
 @Builder
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 @Valid
-public class SubsequenceRequestDto {
+public class SubsequenceRequest {
 
-  @NotBlank(message = "El 'source_text' es obligatorio y no puede estar vacío")
-  @Size(min = 1, max = 1000, message = ("El parametro 'source' no puede tener más de 1000 caracteres."))
-  @Pattern(regexp = "^[a-zA-Z]+$", message = "El parametro 'source' solo puede contener letras inglesas.")
-  private String sourceText;
+  @NotBlank(message = "The 'source' is required and cannot be empty.")
+  @Size(min = 1, max = 1000, message = ("The 'source' parameter cannot be more than 1000 characters."))
+  @Pattern(regexp = "^[a-zA-Z]+$", message = "The 'source' parameter can only contain English letters.")
+  private String source;
 
-  @NotBlank(message = "El 'target_text' es obligatorio y no puede estar vacío")
-  @Size(max = 1000, message = ("El parametro 'target' no puede tener más de 1000 caracteres."))
-  @Pattern(regexp = "^[a-zA-Z]+$", message = "El parametro 'target' solo puede contener letras inglesas.")
-  private String targetText;
+  @NotBlank(message = "The 'target' is required and cannot be empty.")
+  @Size(max = 1000, message = ("The 'target' parameter cannot be more than 1000 characters."))
+  @Pattern(regexp = "^[a-zA-Z]+$", message = "The 'target' parameter can only contain English letters.")
+  private String target;
 
 }

@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
  * @since - 1.0.0
  */
 @Service
-public class SubsecuenceService implements SubsequenceServicePort {
+public class SubsequenceService implements SubsequenceServicePort {
 
 
   @Override
-  public int calculateSubsequences(String sourceText, String targetText) {
-    Subsequence subsequence = new Subsequence(sourceText, targetText);
+  public Subsequence calculateSubsequences(String source, String target) {
+    Subsequence subsequence = new Subsequence(source, target);
     return subsequence.calculateNumberSubsequences();
   }
 

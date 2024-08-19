@@ -5,8 +5,8 @@ package com.appgate.pattern_engine.infrastructure.controller;
 
 import com.appgate.pattern_engine.application.usecase.DistinctSubsequencesUseCasePort;
 import com.appgate.pattern_engine.infrastructure.constant.ResourceMapping;
-import com.appgate.pattern_engine.infrastructure.dto.request.SubsequenceRequestDto;
-import com.appgate.pattern_engine.infrastructure.dto.response.SubsequenceResponseDto;
+import com.appgate.pattern_engine.infrastructure.dto.request.SubsequenceRequest;
+import com.appgate.pattern_engine.infrastructure.dto.response.SubsequenceResponse;
 import com.appgate.pattern_engine.infrastructure.exception.PatterEngineException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -19,7 +19,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -34,11 +34,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 @RequestMapping(ResourceMapping.SUBSEQUENCES)
 @RestController
-public class SubsequencesController {
+public class SubsequenceController {
 
   private final DistinctSubsequencesUseCasePort idistinctSubsequencesUseCasePort;
 
-  public SubsequencesController(
+  public SubsequenceController(
       DistinctSubsequencesUseCasePort idistinctSubsequencesUseCasePort) {
     this.idistinctSubsequencesUseCasePort = idistinctSubsequencesUseCasePort;
   }
@@ -46,24 +46,24 @@ public class SubsequencesController {
   @Operation(summary = "Calculates the number of distinct subsequences of source that are equal to target")
   @ApiResponses(value = {
       @ApiResponse(responseCode = "200", description = "Successful operation", content = {
-          @Content(mediaType = "application/json", schema = @Schema(implementation = SubsequenceResponseDto.class))
+          @Content(mediaType = "application/json", schema = @Schema(implementation = SubsequenceResponse.class))
       }),
       @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content),
       @ApiResponse(responseCode = "400", description = "Bad Request", content = @Content)
   })
 
-  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<SubsequenceResponseDto> getDistinctSubsequences(
-      @Valid @RequestBody SubsequenceRequestDto subsequenceRequestDtoDto,
+  @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  ResponseEntity<SubsequenceResponse> getDistinctSubsequences(
+      @Valid @RequestBody SubsequenceRequest subsequenceRequestDto,
       BindingResult resultErrors) throws PatterEngineException {
 
     log.debug("Entering the controller with sourceText: [{}], targetText: [{}]",
-        subsequenceRequestDtoDto.getSourceText(),
-        subsequenceRequestDtoDto.getTargetText());
+        subsequenceRequestDto.getSource(),
+        subsequenceRequestDto.getTarget());
 
     return ResponseEntity.ok(
         idistinctSubsequencesUseCasePort.countDistinctSubsequences(
-            subsequenceRequestDtoDto.getSourceText(), subsequenceRequestDtoDto.getTargetText()));
+            subsequenceRequestDto.getSource(), subsequenceRequestDto.getTarget()));
   }
 
 
