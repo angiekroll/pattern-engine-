@@ -1,0 +1,22 @@
+# Logger Configuration
+logging:
+  level:
+    com:
+      appgate:
+        pattern_engine: DEBUG
+
+# Health Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  health:
+    show-details: always
+    db:
+      enabled: false
+  info:
+    git:
+      mode: full
+
+

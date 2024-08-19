@@ -1,0 +1,16 @@
+# Logger Configuration
+logging:
+  level:
+    com:
+      appgate:
+        pattern_engine: INFO
+
+# Health Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  health:
+    db:
+      enabled: false

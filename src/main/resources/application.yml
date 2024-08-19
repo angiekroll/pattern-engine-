@@ -1,0 +1,33 @@
+#  Server configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /pattern-engine/v1
+
+
+# Spring configuration
+spring:
+  application:
+    name: pattern-engine
+
+# Logger Configuration
+logging:
+  level:
+    com:
+      appgate:
+        pattern_engine: DEBUG
+
+
+# Health Configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  health:
+    show-details: always
+    db:
+      enabled: false
+  info:
+    git:
+      mode: full
