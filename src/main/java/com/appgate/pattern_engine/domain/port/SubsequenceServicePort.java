@@ -3,14 +3,15 @@
  */
 package com.appgate.pattern_engine.domain.port;
 
+import com.appgate.pattern_engine.domain.model.Subsequence;
+
 /**
- *
  * @author angiekroll@gmail.com - Ángela Carolina Castillo Rodríguez.
  * @version - 1.0.0
  * @since - 1.0.0
  */
-public interface SubsequenceServicePort
-{
-  int calculateSubsequences(String sourceText, String targetText);
+public interface SubsequenceServicePort {
+
+  Subsequence calculateSubsequences(String source, String target);
 
 }

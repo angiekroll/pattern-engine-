@@ -4,43 +4,49 @@
 package com.appgate.pattern_engine.domain.model;
 
 import java.util.stream.IntStream;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 /**
  * @author angiekroll@gmail.com - Ángela Carolina Castillo Rodríguez.
  * @version - 1.0.0
  * @since - 1.0.0
  */
+
+@AllArgsConstructor
+@Getter
 public class Subsequence {
 
-  private String sourceText;
-  private String targetText;
+  private final String source;
+  private final String target;
+  private int numberSubsequences;
 
-  public Subsequence(String sourceText, String targetText) {
-    this.sourceText = sourceText;
-    this.targetText = targetText;
+  public Subsequence(String source, String target) {
+    this.source = source;
+    this.target = target;
   }
 
-  public Subsequence() {
-  }
+  public Subsequence calculateNumberSubsequences() {
 
-  public int calculateNumberSubsequences() {
-
-    int sourceLength = sourceText.length();
-    int targetLength = targetText.length();
+    int sourceLength = source.length();
+    int targetLength = target.length();
 
     int[][] matriz = new int[sourceLength + 1][targetLength + 1];
 
     IntStream.rangeClosed(0, sourceLength).forEach(i -> matriz[i][0] = 1);
 
     IntStream.range(1, sourceLength + 1)
-        .forEach(sourceTextIndex -> IntStream.range(1, targetLength + 1)
-            .forEach(targetTextIndex -> matriz[sourceTextIndex][targetTextIndex] =
-                sourceText.charAt(sourceTextIndex - 1) == targetText.charAt(targetTextIndex - 1)
-                    ? matriz[sourceTextIndex - 1][targetTextIndex - 1] + matriz[sourceTextIndex
-                    - 1][targetTextIndex]
-                    : matriz[sourceTextIndex - 1][targetTextIndex]));
+        .forEach(sourceIndex -> IntStream.range(1, targetLength + 1)
+            .forEach(targetIndex -> matriz[sourceIndex][targetIndex] =
+                source.charAt(sourceIndex - 1) == target.charAt(targetIndex - 1)
+                    ? matriz[sourceIndex - 1][targetIndex - 1] + matriz[sourceIndex
+                    - 1][targetIndex]
+                    : matriz[sourceIndex - 1][targetIndex]));
 
-    return matriz[sourceLength][targetLength];
+    numberSubsequences = matriz[sourceLength][targetLength];
+
+    return this;
 
   }
 

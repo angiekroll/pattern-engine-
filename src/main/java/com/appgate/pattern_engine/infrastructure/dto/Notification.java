@@ -15,14 +15,14 @@ import lombok.Data;
 
 @Data
 @Builder
-public class NotificationDto {
+public class Notification {
 
   private Instant timestamp;
   private Integer status;
   private String error;
   private String message;
 
-  public NotificationDto(Instant timestamp, Integer status, String error, String message) {
+  public Notification(Instant timestamp, Integer status, String error, String message) {
     this.timestamp = timestamp;
     this.status = status;
     this.error = error;
