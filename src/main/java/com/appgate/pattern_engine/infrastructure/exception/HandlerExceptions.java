@@ -68,17 +68,6 @@ public class HandlerExceptions {
             .build());
   }
 
-  public static void validateInputFields(BindingResult resultErrors) throws PatterEngineException {
-    if (resultErrors.hasErrors()) {
-      List<FieldError> fieldErrors = resultErrors.getFieldErrors();
-      List<String> errorMessages = fieldErrors.stream()
-          .map(error -> error.getField() + ": " + error.getDefaultMessage())
-          .toList();
-      throw new PatterEngineException(NotificationCode.INVALID_INPUT,
-          new Throwable(errorMessages.toString()));
-    }
-  }
-
   @ExceptionHandler(MethodArgumentNotValidException.class)
   public ResponseEntity<Notification> handlerMethodArgumentNotValidException(Exception ex) {
     log.error("Incorrect validations: {}", ex.getMessage());
@@ -103,6 +92,5 @@ public class HandlerExceptions {
             .build());
   }
 
-  // MethodArgumentNotValidException
 
 }

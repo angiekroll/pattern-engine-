@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "883d8caa-4997-4fe8-9123-dcf2b6acc5b5",
+		"name": "Appate-AWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4615353"
+	},
+	"item": [
+		{
+			"name": "HealthCheck",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://67.202.55.154:8080/pattern-engine/v1/actuator/health",
+					"protocol": "http",
+					"host": [
+						"67",
+						"202",
+						"55",
+						"154"
+					],
+					"port": "8080",
+					"path": [
+						"pattern-engine",
+						"v1",
+						"actuator",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "NO-EJECUTAR-subsequences-queryParams",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://67.202.55.154:8080/pattern-engine/v1/subsequences?source=rabbbit&target=rabbit",
+					"protocol": "http",
+					"host": [
+						"67",
+						"202",
+						"55",
+						"154"
+					],
+					"port": "8080",
+					"path": [
+						"pattern-engine",
+						"v1",
+						"subsequences"
+					],
+					"query": [
+						{
+							"key": "source",
+							"value": "rabbbit"
+						},
+						{
+							"key": "target",
+							"value": "rabbit"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "subsequences",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"source\":\"babgbag\",\n    \"target\":\"bag\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://67.202.55.154:8080/pattern-engine/v1/subsequences",
+					"protocol": "http",
+					"host": [
+						"67",
+						"202",
+						"55",
+						"154"
+					],
+					"port": "8080",
+					"path": [
+						"pattern-engine",
+						"v1",
+						"subsequences"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
