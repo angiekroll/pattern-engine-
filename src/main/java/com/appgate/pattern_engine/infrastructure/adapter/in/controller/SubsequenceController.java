@@ -1,7 +1,7 @@
 /**
  * Copyright 2024, Company. All rights reserved Date: 17/08/24
  */
-package com.appgate.pattern_engine.infrastructure.controller;
+package com.appgate.pattern_engine.infrastructure.adapter.in.controller;
 
 import com.appgate.pattern_engine.application.usecase.DistinctSubsequencesUseCasePort;
 import com.appgate.pattern_engine.infrastructure.constant.ResourceMapping;

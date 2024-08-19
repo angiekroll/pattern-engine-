@@ -47,16 +47,12 @@ Response success: Http-Code: 200
 ### STEPS IN CLOUD COMPUTING
 - From postman consume the following REST services:
 
-LOCAL:
-- `POST`: http://localhost:8080/pattern-engine/v1/subsequences
-
 AWS:
 - `POST`: http://67.202.55.154:8080/pattern-engine/v1/subsequences
 
 The collection is located in the following project path:
 
 ```
-./src/main/resources/collections/pattern-engine-local.postman_collection.json
 ./src/main/resources/collections/pattern-engine-aws.postman_collection.json
 ```
 
@@ -78,6 +74,25 @@ The collection is located in the following project path:
 - Import the project from your IDE in this case intellij
 - Compile the project
 - Run
-- Tester Potsman
+- Tester Potsman:
+    
+    `POST`: http://localhost:8080/pattern-engine/v1/subsequences
+
+- The collection is located in the following project path:
+
+```
+./src/main/resources/collections/pattern-engine-local.postman_collection.json
+```
+
+
+# LAYER DIAGRAM:
+
+<img src="./src/main/resources/images/Layer-diagram.png">
+
+- The diagram is located in the following project path:
+
+```
+./src/main/resources/diagram/Layer-diagram.drawio
+```
 
 
