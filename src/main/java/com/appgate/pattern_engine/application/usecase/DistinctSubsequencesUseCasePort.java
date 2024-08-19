@@ -3,7 +3,7 @@
  */
 package com.appgate.pattern_engine.application.usecase;
 
-import com.appgate.pattern_engine.infrastructure.dto.SubsequenceDto;
+import com.appgate.pattern_engine.infrastructure.dto.response.SubsequenceResponseDto;
 import com.appgate.pattern_engine.infrastructure.exception.PatterEngineException;
 
 /**
@@ -13,6 +13,6 @@ import com.appgate.pattern_engine.infrastructure.exception.PatterEngineException
  * @since - 1.0.0
  */
 public interface DistinctSubsequencesUseCasePort {
-  SubsequenceDto countDistinctSubsequences(String sourceText, String targetText) throws PatterEngineException;
+  SubsequenceResponseDto countDistinctSubsequences(String sourceText, String targetText) throws PatterEngineException;
 
 }

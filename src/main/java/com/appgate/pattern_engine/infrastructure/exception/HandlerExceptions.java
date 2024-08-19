@@ -3,12 +3,17 @@
  */
 package com.appgate.pattern_engine.infrastructure.exception;
 
+import com.appgate.pattern_engine.infrastructure.constant.NotificationCode;
 import com.appgate.pattern_engine.infrastructure.dto.NotificationDto;
 import jakarta.validation.ConstraintViolationException;
 import java.time.Instant;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -53,6 +58,30 @@ public class HandlerExceptions {
   @ExceptionHandler(ConstraintViolationException.class)
   public ResponseEntity<NotificationDto> handlerConstraintViolationException(Exception ex) {
     log.error("Validaciones incorrectas: {}", ex.getMessage());
+
+   return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(NotificationDto.builder()
+            .message("Validaciones incorrectas. " + ex.getMessage())
+            .status(HttpStatus.BAD_REQUEST.value())
+            .error(HttpStatus.BAD_REQUEST.getReasonPhrase())
+            .timestamp(Instant.now())
+            .build());
+  }
+
+  public static void validateInputFields(BindingResult resultErrors) throws PatterEngineException {
+    if (resultErrors.hasErrors()) {
+      List<FieldError> fieldErrors = resultErrors.getFieldErrors();
+      List<String> errorMessages = fieldErrors.stream()
+          .map(error -> error.getField() + ": " + error.getDefaultMessage())
+          .toList();
+      throw new PatterEngineException(NotificationCode.INVALID_INPUT,
+          new Throwable(errorMessages.toString()));
+    }
+  }
+
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public ResponseEntity<NotificationDto> handlerMethodArgumentNotValidException(Exception ex) {
+    log.error("Validaciones incorrectas: {}", ex.getMessage());
     return ResponseEntity.status(HttpStatus.BAD_REQUEST)
         .body(NotificationDto.builder()
             .message("Validaciones incorrectas. " + ex.getMessage())
@@ -73,5 +102,7 @@ public class HandlerExceptions {
             .timestamp(Instant.now())
             .build());
   }
+
+  // MethodArgumentNotValidException
 
 }

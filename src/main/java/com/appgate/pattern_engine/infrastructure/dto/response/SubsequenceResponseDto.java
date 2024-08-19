@@ -1,7 +1,7 @@
 /**
  * Copyright 2024, Company. All rights reserved Date: 18/08/24
  */
-package com.appgate.pattern_engine.infrastructure.dto;
+package com.appgate.pattern_engine.infrastructure.dto.response;
 
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +14,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class SubsequenceDto {
+public class SubsequenceResponseDto {
 
   private String subsequence;
   private int numberSubsequences;

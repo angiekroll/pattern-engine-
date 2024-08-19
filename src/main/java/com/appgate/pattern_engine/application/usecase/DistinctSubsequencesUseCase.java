@@ -5,7 +5,7 @@ package com.appgate.pattern_engine.application.usecase;
 
 import com.appgate.pattern_engine.domain.port.SubsequenceServicePort;
 import com.appgate.pattern_engine.infrastructure.constant.NotificationCode;
-import com.appgate.pattern_engine.infrastructure.dto.SubsequenceDto;
+import com.appgate.pattern_engine.infrastructure.dto.response.SubsequenceResponseDto;
 import com.appgate.pattern_engine.infrastructure.exception.PatterEngineException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -27,17 +27,22 @@ public class DistinctSubsequencesUseCase implements DistinctSubsequencesUseCaseP
   }
 
   @Override
-  public SubsequenceDto countDistinctSubsequences(String sourceText, String targetText)
+  public SubsequenceResponseDto countDistinctSubsequences(String sourceText, String targetText)
       throws PatterEngineException {
 
+    log.debug("validating the length of the targetText: [{}]", targetText);
     if (targetText.length() > sourceText.length()) {
-      log.error("Error getting response from bank external API");
       throw new PatterEngineException(NotificationCode.INVALID_INPUT);
     }
 
+    log.debug("Calculating the number of subsequences");
+    log.info("Calculating the number of subsequences, sourceText: [{}], targetText: [{}]", sourceText, targetText);
     int numberSubsequence = subsequenceServicePort.calculateSubsequences(sourceText, targetText);
 
-    return SubsequenceDto.builder()
+    log.debug("Number of subsequences is: [{}]", numberSubsequence);
+    log.info("successful calculation");
+
+    return SubsequenceResponseDto.builder()
         .subsequence(targetText)
         .numberSubsequences(numberSubsequence)
         .build();
