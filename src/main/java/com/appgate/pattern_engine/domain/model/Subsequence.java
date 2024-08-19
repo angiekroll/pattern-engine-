@@ -6,7 +6,6 @@ package com.appgate.pattern_engine.domain.model;
 import java.util.stream.IntStream;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 /**
  * @author angiekroll@gmail.com - Ángela Carolina Castillo Rodríguez.
