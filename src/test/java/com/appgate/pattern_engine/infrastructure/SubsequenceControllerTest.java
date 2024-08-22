@@ -68,8 +68,11 @@ class SubsequenceControllerTest {
             .content(requetsJsonString))
         .andExpect(status().isBadRequest())
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
-        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(
-            "Incorrect validations. getDistinctSubsequences.subsequenceRequestDto.target: The 'target' is required and cannot be empty."));
+        .andExpect(MockMvcResultMatchers.jsonPath("$.message").value("Validation failed"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors").isArray())
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].field").value("target"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].message")
+            .value("The 'target' is required and cannot be empty."));
   }
 
   @Test
@@ -84,8 +87,10 @@ class SubsequenceControllerTest {
         .andExpect(status().isBadRequest())
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(
-            "Incorrect validations. getDistinctSubsequences.subsequenceRequestDto.source: The 'source' is required and cannot be empty."));
-
+            "Validation failed"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].field").value("source"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].message")
+            .value("The 'source' is required and cannot be empty."));
   }
 
   @Test
@@ -102,8 +107,10 @@ class SubsequenceControllerTest {
         .andExpect(status().isBadRequest())
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(
-            "Incorrect validations. getDistinctSubsequences.subsequenceRequestDto.source: The 'source' parameter cannot be more than 1000 characters."));
-
+            "Validation failed"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].field").value("source"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].message")
+            .value("The 'source' parameter cannot be more than 1000 characters."));
   }
 
   @Test
@@ -119,7 +126,10 @@ class SubsequenceControllerTest {
         .andExpect(status().isBadRequest())
         .andExpect(MockMvcResultMatchers.jsonPath("$.status").value(400))
         .andExpect(MockMvcResultMatchers.jsonPath("$.message").value(
-            "Incorrect validations. getDistinctSubsequences.subsequenceRequestDto.source: The 'source' parameter can only contain English letters."));
+            "Validation failed"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].field").value("source"))
+        .andExpect(MockMvcResultMatchers.jsonPath("$.errors[0].message")
+            .value("The 'source' parameter can only contain English letters."));
 
   }
 
